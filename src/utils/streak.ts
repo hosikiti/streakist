@@ -1,7 +1,7 @@
 import { Days, formatDate, parseDate } from './date';
 import * as datefns from 'date-fns';
 
-// It can be useful to customize the start of the week as a preference
+// it can be useful to customize the start of the week as a user preference
 const WEEK_START_DAY = Days.Monday;
 
 export const getDailyStreak = (
@@ -12,7 +12,7 @@ export const getDailyStreak = (
     if (history.length === 0) return 0;
 
     const firstDate = parseDate(history[0]);
-    let dt = datefns.subDays(parseDate(currentDate), 1); // Start from yesterday
+    let dt = datefns.subDays(parseDate(currentDate), 1); // start from yesterday
 
     // use a set for faster lookup
     const historySet = new Set(history);
@@ -82,9 +82,10 @@ export const getWeeklyStreak = (
     // count the streak for the current week
     dt = weekStartDay;
     currentWeekStreak = 0;
+    let parsedCurrentDate = parseDate(currentDate);
     while (
-        datefns.isBefore(dt, parseDate(currentDate)) ||
-        datefns.isSameDay(dt, parseDate(currentDate))
+        datefns.isBefore(dt, parsedCurrentDate) ||
+        datefns.isSameDay(dt, parsedCurrentDate)
     ) {
         currentWeekStreak += historySet.has(formatDate(dt)) ? 1 : 0;
         dt = datefns.addDays(dt, 1);

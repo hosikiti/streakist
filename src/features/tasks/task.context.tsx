@@ -74,24 +74,18 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
         },
         getStreak: (task: Task, currentDate: string) => {
             const history = task.completeHistory;
-            if (
-                history.length === 0 ||
-                !task.trackingOptions.dailyTrackingDays ||
-                !task.trackingOptions.weeklyTrackingFrequency
-            )
-                return 0;
+            const dailyTrackingDays =
+                task.trackingOptions.dailyTrackingDays || [];
+            const weeklyTrackingFrequency =
+                task.trackingOptions.weeklyTrackingFrequency || 0;
 
             if (task.trackingType === TrackingType.Daily) {
-                return getDailyStreak(
-                    history,
-                    currentDate,
-                    task.trackingOptions.dailyTrackingDays
-                );
+                return getDailyStreak(history, currentDate, dailyTrackingDays);
             } else {
                 return getWeeklyStreak(
                     history,
                     currentDate,
-                    task.trackingOptions.weeklyTrackingFrequency
+                    weeklyTrackingFrequency
                 );
             }
         },
