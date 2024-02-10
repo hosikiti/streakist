@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createContext, useContext } from 'react';
 import { Task, TrackingType } from './task.types';
 import { Days, formatDate, getCurrentDate } from '../../utils/date';
+import { getDailyStreak, getWeeklyStreak } from '../../utils/streak';
 
 export interface TaskStore {
     currentDate: string;
@@ -9,6 +10,7 @@ export interface TaskStore {
     addTask: (task: Task) => void;
     toggleDone: (taskId: string) => void;
     setCurrentDate: (date: Date) => void;
+    getStreak: (task: Task, currentDate: string) => number;
 }
 
 export const TaskContext = createContext<TaskStore | undefined>(undefined);
@@ -91,6 +93,29 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
                 ...prev,
                 currentDate: formatDate(date),
             }));
+        },
+        getStreak: (task: Task, currentDate: string) => {
+            const history = task.completeHistory;
+            if (
+                history.length === 0 ||
+                !task.trackingOptions.dailyTrackingDays ||
+                !task.trackingOptions.weeklyTrackingFrequency
+            )
+                return 0;
+
+            if (task.trackingType === TrackingType.Daily) {
+                return getDailyStreak(
+                    history,
+                    currentDate,
+                    task.trackingOptions.dailyTrackingDays
+                );
+            } else {
+                return getWeeklyStreak(
+                    history,
+                    currentDate,
+                    task.trackingOptions.weeklyTrackingFrequency
+                );
+            }
         },
     };
 

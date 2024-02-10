@@ -16,7 +16,7 @@ export default function CurrentDateSelect() {
     };
 
     return (
-        <div className="py-8 flex flex-row gap-8 justify-center">
+        <div className="flex flex-row gap-8 justify-center">
             <button onClick={setPreviousDate}>Prev</button>
             <span className="text-3xl">{currentDate}</span>
             <button onClick={setNextDate}>Next</button>
