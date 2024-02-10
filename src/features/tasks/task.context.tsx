@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { createContext, useContext } from 'react';
-import { Task } from './task.types';
-import { getCurrentDate } from '../../utils/date';
+import { Task, TrackingType } from './task.types';
+import { Days, formatDate, getCurrentDate } from '../../utils/date';
 
 export interface TaskStore {
     currentDate: string;
     tasks: Task[];
     addTask: (task: Task) => void;
     toggleDone: (taskId: string) => void;
+    setCurrentDate: (date: Date) => void;
 }
 
 export const TaskContext = createContext<TaskStore | undefined>(undefined);
@@ -32,11 +33,23 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
                 id: '1',
                 title: 'LeetCode',
                 completeHistory: [],
+                trackingType: TrackingType.Daily,
+                trackingOptions: {
+                    dailyTrackingDays: [
+                        Days.Monday,
+                        Days.Wednesday,
+                        Days.Friday,
+                    ],
+                },
             },
             {
                 id: '2',
                 title: 'HackerRank',
                 completeHistory: [],
+                trackingType: TrackingType.Weekly,
+                trackingOptions: {
+                    weeklyTrackingFrequency: 2,
+                },
             },
         ],
         addTask: (task: Task) => {
@@ -71,6 +84,12 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
                         };
                     }
                 }),
+            }));
+        },
+        setCurrentDate: (date: Date) => {
+            setTaskStore((prev) => ({
+                ...prev,
+                currentDate: formatDate(date),
             }));
         },
     };

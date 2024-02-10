@@ -9,10 +9,15 @@ export default function TaskList() {
                 const isDone = task.completeHistory.includes(currentDate);
 
                 return (
-                    <div className="w-full flex flex-row items-center justify-between">
+                    <div
+                        key={task.id}
+                        className="w-full flex flex-row items-center justify-between"
+                    >
                         <div className="flex flex-col">
                             <span>{task.title}</span>
-                            <span>{task.completeHistory.join(',')}</span>
+                            <span className="text-sm text-slate-500">
+                                {task.completeHistory.join(',')}
+                            </span>
                         </div>
                         <button
                             className={`btn btn-circle btn-accent ${
