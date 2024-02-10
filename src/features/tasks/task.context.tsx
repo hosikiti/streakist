@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createContext, useContext } from 'react';
 import { Task, TrackingType } from './task.types';
-import { Days, formatDate, getCurrentDate } from '../../utils/date';
+import { formatDate, getCurrentDate } from '../../utils/date';
 import { getDailyStreak, getWeeklyStreak } from '../../utils/streak';
 import { usePersistentState } from '../../hooks/usePersistentState';
 

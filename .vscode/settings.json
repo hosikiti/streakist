@@ -9,4 +9,5 @@
     },
     "prettier.singleQuote": true,
     "prettier.tabWidth": 4,
+    "css.lint.unknownAtRules": "ignore"
 }
