@@ -3,6 +3,7 @@ import { createContext, useContext } from 'react';
 import { Task, TrackingType } from './task.types';
 import { Days, formatDate, getCurrentDate } from '../../utils/date';
 import { getDailyStreak, getWeeklyStreak } from '../../utils/streak';
+import { usePersistentState } from '../../hooks/usePersistentState';
 
 export interface TaskStore {
     currentDate: string;
@@ -30,30 +31,7 @@ type TaskContextProviderProps = {
 export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
     const defaultTaskStore: TaskStore = {
         currentDate: getCurrentDate(),
-        tasks: [
-            {
-                id: '1',
-                title: 'LeetCode',
-                completeHistory: [],
-                trackingType: TrackingType.Daily,
-                trackingOptions: {
-                    dailyTrackingDays: [
-                        Days.Monday,
-                        Days.Wednesday,
-                        Days.Friday,
-                    ],
-                },
-            },
-            {
-                id: '2',
-                title: 'HackerRank',
-                completeHistory: [],
-                trackingType: TrackingType.Weekly,
-                trackingOptions: {
-                    weeklyTrackingFrequency: 2,
-                },
-            },
-        ],
+        tasks: [],
         addTask: (task: Task) => {
             setTaskStore((prev) => ({
                 ...prev,
@@ -119,7 +97,10 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
         },
     };
 
-    const [taskStore, setTaskStore] = useState<TaskStore>(defaultTaskStore);
+    const [taskStore, setTaskStore] = usePersistentState<TaskStore>(
+        'task',
+        defaultTaskStore
+    );
 
     return (
         <TaskContext.Provider value={taskStore}>
