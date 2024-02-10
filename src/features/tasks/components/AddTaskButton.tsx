@@ -4,6 +4,7 @@ import { useTaskContext } from '../task.context';
 import TaskForm, { AddTaskForm } from './TaskForm';
 import { Task, TrackingType } from '../task.types';
 import { generateUUID } from '../../../utils/uuid';
+import { PlusIcon } from '@heroicons/react/24/solid';
 
 const ADD_MODAL_ID = 'add_modal';
 
@@ -58,6 +59,7 @@ export default function AddTaskButton() {
     return (
         <>
             <button className="btn btn-primary" onClick={openModal}>
+                <PlusIcon className="w-6 h-6" />
                 ADD TASK
             </button>
             <dialog id={ADD_MODAL_ID} className="modal">

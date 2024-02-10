@@ -1,6 +1,7 @@
 import { parseDate } from '../../../utils/date';
 import { useTaskContext } from '../task.context';
 import * as datefns from 'date-fns';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
 export default function CurrentDateSelect() {
     const { currentDate, setCurrentDate } = useTaskContext();
@@ -15,11 +16,17 @@ export default function CurrentDateSelect() {
         setCurrentDate(nextDate);
     };
 
+    const formattedDate = datefns.format(parseDate(currentDate), 'P EEE');
+
     return (
         <div className="flex flex-row gap-8 justify-center">
-            <button onClick={setPreviousDate}>Prev</button>
-            <span className="text-3xl">{currentDate}</span>
-            <button onClick={setNextDate}>Next</button>
+            <button onClick={setPreviousDate}>
+                <ChevronLeftIcon className="w-6 h-6" />
+            </button>
+            <span className="text-3xl">{formattedDate}</span>
+            <button onClick={setNextDate}>
+                <ChevronRightIcon className="w-6 h-6" />
+            </button>
         </div>
     );
 }
