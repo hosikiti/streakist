@@ -1,5 +1,5 @@
 import { useTaskContext } from '../task.context';
-import TaskItem from './task-item.component';
+import TaskItem from './TaskListItem';
 
 export default function TaskList() {
     const { tasks, currentDate, getStreak, toggleDone } = useTaskContext();

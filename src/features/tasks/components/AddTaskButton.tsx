@@ -1,8 +1,7 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { Days, DaysOfWeek } from '../../../utils/date';
+import { useForm } from 'react-hook-form';
+import { DaysOfWeek } from '../../../utils/date';
 import { useTaskContext } from '../task.context';
-import { useRef } from 'react';
-import TaskForm, { AddTaskForm } from './task-form.component';
+import TaskForm, { AddTaskForm } from './TaskForm';
 import { Task, TrackingType } from '../task.types';
 import { generateUUID } from '../../../utils/uuid';
 

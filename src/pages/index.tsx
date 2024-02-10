@@ -1,6 +1,6 @@
-import AddTaskButton from '../features/tasks/components/add-task-button.component';
-import CurrentDateSelect from '../features/tasks/components/current-date-select.component';
-import TaskList from '../features/tasks/components/task-list.component';
+import AddTaskButton from '../features/tasks/components/AddTaskButton';
+import CurrentDateSelect from '../features/tasks/components/CurrentDateSelect';
+import TaskList from '../features/tasks/components/TaskList';
 
 export default function IndexPage() {
     return (
