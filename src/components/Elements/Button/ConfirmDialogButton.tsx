@@ -36,9 +36,6 @@ export default function ConfirmDialogButton({
                         </div>
                     </div>
                 </div>
-                <label className="modal-backdrop" htmlFor={MODAL_ID}>
-                    Close
-                </label>
             </div>
         </>
     );
