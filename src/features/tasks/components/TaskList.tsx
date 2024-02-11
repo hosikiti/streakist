@@ -2,6 +2,8 @@ import { useTaskContext } from '../task.context';
 import { MemoTaskCard } from './TaskCard';
 import { useTrackableTasks } from '../hooks/useTrackableTasks';
 import { useEditTaskDialog } from '../hooks/useEditTaskDialog';
+import EmptyState from './EmptyState';
+import NothingTodoState from './NothingToDoState';
 
 export default function TaskList() {
     const { tasks, currentDate, toggleDone } = useTaskContext();
@@ -22,6 +24,10 @@ export default function TaskList() {
                     />
                 );
             })}
+            {tasks.length === 0 && <EmptyState />}
+            {tasks.length > 0 && trackableTasks.length === 0 && (
+                <NothingTodoState />
+            )}
 
             {/* task edit modal */}
             {Dialog}
