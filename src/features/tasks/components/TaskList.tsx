@@ -85,6 +85,7 @@ export default function TaskList() {
 
     return (
         <div className="p-4 w-full md:w-[60%] flex flex-col items-center gap-4">
+            {/* task list */}
             {trackableTasks.map((task) => {
                 const isDone = task.completeHistory.includes(currentDate);
                 const streak = getStreak(task, currentDate);
