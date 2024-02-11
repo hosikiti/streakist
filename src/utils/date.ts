@@ -32,6 +32,8 @@ export const DaysLabel = [
     'Saturday',
 ];
 
+export const DaysShortLabel = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 export const getCurrentDate = () => {
     return datefns.format(new Date(), DATE_FORMAT);
 };

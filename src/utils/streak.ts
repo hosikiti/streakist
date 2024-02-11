@@ -54,7 +54,7 @@ export const getWeeklyStreak = (
 
     // count the streak from the last week
     const firstDate = parseDate(history[0]);
-    let weekStartDay = datefns.startOfWeek(parseDate(currentDate), {
+    const weekStartDay = datefns.startOfWeek(parseDate(currentDate), {
         weekStartsOn: WEEK_START_DAY,
     });
     let dt = datefns.subDays(weekStartDay, 1); // Start from last week end
@@ -97,4 +97,25 @@ export const getWeeklyStreak = (
     }
 
     return streak;
+};
+
+export const getCurrentWeekStreak = (
+    history: string[],
+    currentDate: string
+) => {
+    const weekStartDay = datefns.startOfWeek(parseDate(currentDate), {
+        weekStartsOn: WEEK_START_DAY,
+    });
+    const historySet = new Set(history);
+    const parsedCurrentDate = parseDate(currentDate);
+    let dt = weekStartDay;
+    let currentWeekStreak = 0;
+    while (
+        datefns.isBefore(dt, parsedCurrentDate) ||
+        datefns.isSameDay(dt, parsedCurrentDate)
+    ) {
+        currentWeekStreak += historySet.has(formatDate(dt)) ? 1 : 0;
+        dt = datefns.addDays(dt, 1);
+    }
+    return currentWeekStreak;
 };
