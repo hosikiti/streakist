@@ -103,6 +103,9 @@ export const getCurrentWeekStreak = (
     history: string[],
     currentDate: string
 ) => {
+    if (history.length === 0) {
+        return 0;
+    }
     const weekStartDay = datefns.startOfWeek(parseDate(currentDate), {
         weekStartsOn: WEEK_START_DAY,
     });
