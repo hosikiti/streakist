@@ -1,5 +1,5 @@
 import { useTaskContext } from '../task.context';
-import TaskItem from './TaskListItem';
+import { MemoTaskItem } from './TaskListItem';
 import { Task, TrackingType } from '../task.types';
 import TaskForm, { AddTaskForm, convertAddFormValueToTask } from './TaskForm';
 import { useForm } from 'react-hook-form';
@@ -85,13 +85,12 @@ export default function TaskList() {
 
     return (
         <div className="p-4 w-full md:w-[60%] flex flex-col items-center gap-4">
-            {/* task list */}
             {trackableTasks.map((task) => {
                 const isDone = task.completeHistory.includes(currentDate);
                 const streak = getStreak(task, currentDate);
 
                 return (
-                    <TaskItem
+                    <MemoTaskItem
                         key={task.id}
                         currentDate={currentDate}
                         task={task}

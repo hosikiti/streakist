@@ -1,8 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { DaysOfWeek } from '../../../utils/date';
-import { useTaskContext } from '../task.context';
 import TaskForm, { AddTaskForm, convertAddFormValueToTask } from './TaskForm';
-import { TrackingType } from '../task.types';
+import { Task, TrackingType } from '../task.types';
 import { PlusIcon } from '@heroicons/react/24/solid';
 
 const ADD_MODAL_ID = 'add_modal';
@@ -14,12 +13,15 @@ const addTaskDefaultValues: AddTaskForm = {
     weeklyTrackingFrequency: '3',
 };
 
-export default function AddTaskButton() {
+type AddTaskButtonProps = {
+    onSubmitTask?: (task: Task) => void;
+};
+
+export default function AddTaskButton({ onSubmitTask }: AddTaskButtonProps) {
     const { register, handleSubmit, formState, reset, watch } =
         useForm<AddTaskForm>({
             defaultValues: addTaskDefaultValues,
         });
-    const taskContext = useTaskContext();
 
     const openModal = () => {
         const modal = document.getElementById(ADD_MODAL_ID) as HTMLFormElement;
@@ -33,7 +35,7 @@ export default function AddTaskButton() {
 
     const onSubmit = handleSubmit((data) => {
         const newTask = convertAddFormValueToTask(data);
-        taskContext.addTask(newTask);
+        onSubmitTask?.(newTask);
         closeModal();
         reset();
     });

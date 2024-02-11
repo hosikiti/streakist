@@ -1,11 +1,16 @@
 import { parseDate } from '../../../utils/date';
-import { useTaskContext } from '../task.context';
 import * as datefns from 'date-fns';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid';
 
-export default function CurrentDateSelect() {
-    const { currentDate, setCurrentDate } = useTaskContext();
+type CurrentDateSelectProps = {
+    currentDate: string;
+    setCurrentDate: (date: Date) => void;
+};
 
+export default function CurrentDateSelect({
+    currentDate,
+    setCurrentDate,
+}: CurrentDateSelectProps) {
     const setPreviousDate = () => {
         const previousDate = datefns.subDays(parseDate(currentDate), 1);
         setCurrentDate(previousDate);

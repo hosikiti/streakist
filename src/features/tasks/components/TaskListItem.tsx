@@ -3,6 +3,7 @@ import { Task, TrackingType } from '../task.types';
 import { getCurrentWeekStreak } from '../../../utils/streak';
 import { DaysShortLabel } from '../../../utils/date';
 import { useMemo } from 'react';
+import React from 'react';
 
 type TaskItemProps = {
     task: Task;
@@ -96,3 +97,13 @@ export default function TaskItem({
         </div>
     );
 }
+
+export const MemoTaskItem = React.memo(TaskItem, (prevProps, nextProps) => {
+    if (
+        prevProps.task !== nextProps.task ||
+        prevProps.currentDate !== nextProps.currentDate
+    ) {
+        return false;
+    }
+    return true;
+});
