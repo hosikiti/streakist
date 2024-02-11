@@ -1,9 +1,11 @@
 import { useTaskContext } from '../task.context';
 import TaskItem from './TaskListItem';
-import { Task } from '../task.types';
+import { Task, TrackingType } from '../task.types';
 import TaskForm, { AddTaskForm, convertAddFormValueToTask } from './TaskForm';
 import { useForm } from 'react-hook-form';
 import ConfirmDialogButton from '../../../components/Elements/Button/ConfirmDialogButton';
+import { useMemo } from 'react';
+import { parseDate } from '../../../utils/date';
 
 const EDIT_MODAL_ID = 'edit_modal';
 
@@ -45,6 +47,19 @@ export default function TaskList() {
         openModal();
     };
 
+    // task list only displays daily tasks that should be tracked today
+    const trackableTasks = useMemo(() => {
+        return tasks.filter((task) => {
+            if (task.trackingType === TrackingType.Weekly) {
+                return true;
+            }
+            const currentDay = parseDate(currentDate).getDay();
+            const isTrackingDay =
+                task.trackingOptions.dailyTrackingDays?.includes(currentDay);
+            return isTrackingDay;
+        });
+    }, [tasks, currentDate]);
+
     const handleDelete = () => {
         const taskId = getValues('id');
         if (!taskId) {
@@ -70,7 +85,7 @@ export default function TaskList() {
 
     return (
         <div className="p-4 w-full md:w-[60%] flex flex-col items-center gap-4">
-            {tasks.map((task) => {
+            {trackableTasks.map((task) => {
                 const isDone = task.completeHistory.includes(currentDate);
                 const streak = getStreak(task, currentDate);
 
@@ -120,7 +135,7 @@ export default function TaskList() {
                                 <button className="btn">Cancel</button>
                                 <div
                                     className="btn btn-primary"
-                                    onClick={() => onSubmit()}
+                                    onClick={onSubmit}
                                 >
                                     Update
                                 </div>

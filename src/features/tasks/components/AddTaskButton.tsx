@@ -2,8 +2,7 @@ import { useForm } from 'react-hook-form';
 import { DaysOfWeek } from '../../../utils/date';
 import { useTaskContext } from '../task.context';
 import TaskForm, { AddTaskForm, convertAddFormValueToTask } from './TaskForm';
-import { Task, TrackingType } from '../task.types';
-import { generateUUID } from '../../../utils/uuid';
+import { TrackingType } from '../task.types';
 import { PlusIcon } from '@heroicons/react/24/solid';
 
 const ADD_MODAL_ID = 'add_modal';

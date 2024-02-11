@@ -6,7 +6,7 @@ A simple habit tracker app
 
 ## TODO
 
-- [ ] Task should not be displayed when the current day is not the specified day
+- [x] Task should not be displayed when the current day is not the specified day
 - [x] Task edit and delete functionality
 - [ ] Improve task list UI
 - [ ] Check rendering performance
