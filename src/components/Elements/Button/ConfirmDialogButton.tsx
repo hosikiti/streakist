@@ -14,7 +14,6 @@ export default function ConfirmDialogButton({
     return (
         <>
             {render(MODAL_ID)}
-            <label htmlFor={MODAL_ID} className="btn modal-button"></label>
             <input type="checkbox" id={MODAL_ID} className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box">

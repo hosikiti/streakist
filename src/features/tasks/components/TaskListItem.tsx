@@ -52,7 +52,7 @@ export default function TaskItem({
         <div className="card w-full glass">
             <div className="card-body flex flex-row justify-between items-center p-4">
                 <div className="flex flex-col gap-2">
-                    <span className="text-white font-bold text-4xl">
+                    <span className="dark:text-white font-bold text-4xl">
                         {streak}
                     </span>
                     <div className="flex gap-1 w-[30px] flex-wrap">
@@ -64,14 +64,14 @@ export default function TaskItem({
                                         key={i}
                                         className={`rounded-full ${
                                             i < currentWeekStreak
-                                                ? 'bg-white'
-                                                : 'bg-gray-400'
+                                                ? 'dark:bg-white bg-gray-900'
+                                                : 'dark:bg-gray-400 bg-gray-300'
                                         } w-1 h-1`}
                                     ></div>
                                 ))}
                     </div>
                 </div>
-                <div className="card-title text-white flex flex-col items-start w-[35%] md:w-[40%]">
+                <div className="card-title dark:text-white flex flex-col items-start w-[35%] md:w-[40%]">
                     <span className="line-clamp-2">{task.title}</span>
                     {/* show tracking type info */}
                     <span className="text-xs font-thin">
@@ -81,7 +81,7 @@ export default function TaskItem({
                 <div className="flex flex-row gap-4">
                     {/* show edit button */}
                     <button onClick={onClickEdit}>
-                        <PencilIcon className="h-4 w-4 text-slate-300" />
+                        <PencilIcon className="h-4 w-4 dark:text-slate-300" />
                     </button>
                     {/* show done button */}
                     <button onClick={onClick}>
