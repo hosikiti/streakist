@@ -6,19 +6,19 @@ import { getStreak } from '../task.utils';
 import { useTaskTrackingDescription } from '../hooks/useTaskTrackingDescription';
 import WeeklyProgress from './WeeklyProgress';
 
-type TaskItemProps = {
+type TaskCardProps = {
     task: Task;
     onClick: () => void;
     onClickEdit: () => void;
     currentDate: string;
 };
 
-export default function TaskItem({
+export default function TaskCard({
     task,
     onClick,
     onClickEdit,
     currentDate,
-}: TaskItemProps) {
+}: TaskCardProps) {
     const isDone = task.completeHistory.includes(currentDate);
     const streak = useMemo(
         () => getStreak(task, currentDate),
@@ -69,7 +69,7 @@ export default function TaskItem({
     );
 }
 
-export const MemoTaskItem = React.memo(TaskItem, (prevProps, nextProps) => {
+export const MemoTaskCard = React.memo(TaskCard, (prevProps, nextProps) => {
     if (
         prevProps.task !== nextProps.task ||
         prevProps.currentDate !== nextProps.currentDate

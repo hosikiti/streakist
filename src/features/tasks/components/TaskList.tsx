@@ -1,5 +1,5 @@
 import { useTaskContext } from '../task.context';
-import { MemoTaskItem } from './TaskItem';
+import { MemoTaskCard } from './TaskCard';
 import { useTrackableTasks } from '../hooks/useTrackableTasks';
 import { useEditTaskDialog } from '../hooks/useEditTaskDialog';
 
@@ -13,7 +13,7 @@ export default function TaskList() {
         <div className="p-4 w-full md:w-[60%] flex flex-col items-center gap-4">
             {trackableTasks.map((task) => {
                 return (
-                    <MemoTaskItem
+                    <MemoTaskCard
                         key={task.id}
                         currentDate={currentDate}
                         task={task}
