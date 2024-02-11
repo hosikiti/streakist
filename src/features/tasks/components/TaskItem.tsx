@@ -3,7 +3,7 @@ import { Task, TrackingType } from '../task.types';
 import { useMemo } from 'react';
 import React from 'react';
 import { getStreak } from '../task.utils';
-import { useTaskTrackingDescription } from '../../../hooks/useTaskTrackingDescription';
+import { useTaskTrackingDescription } from '../hooks/useTaskTrackingDescription';
 import WeeklyProgress from './WeeklyProgress';
 
 type TaskItemProps = {

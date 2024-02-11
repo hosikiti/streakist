@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Task, TrackingType } from '../features/tasks/task.types';
-import { parseDate } from '../utils/date';
+import { Task, TrackingType } from '../task.types';
+import { parseDate } from '../../../utils/date';
 
 export const useTrackableTasks = (tasks: Task[], currentDate: string) => {
     return useMemo(() => {

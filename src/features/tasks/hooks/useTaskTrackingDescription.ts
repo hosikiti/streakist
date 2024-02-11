@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { Task, TrackingType } from '../features/tasks/task.types';
-import { DaysShortLabel } from '../utils/date';
+import { Task, TrackingType } from '../task.types';
+import { DaysShortLabel } from '../../../utils/date';
 
 export const useTaskTrackingDescription = (task: Task) => {
     return useMemo(() => {

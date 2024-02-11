@@ -11,7 +11,7 @@ const MemoCurrentDateSelect = React.memo(
 );
 
 export default function IndexPage() {
-    const { addTask, currentDate, setCurrentDate } = useTaskContext();
+    const { currentDate, setCurrentDate } = useTaskContext();
 
     return (
         <div className="py-8 w-full flex flex-col items-center">
@@ -22,7 +22,7 @@ export default function IndexPage() {
                     setCurrentDate={setCurrentDate}
                 />
             </div>
-            <MemoAddTaskButton onSubmitTask={addTask} />
+            <MemoAddTaskButton />
             <TaskList />
         </div>
     );
