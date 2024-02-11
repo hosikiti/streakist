@@ -38,6 +38,6 @@ npm test
 - [x] Task edit and delete functionality
 - [x] Improve task list UI
 - [x] Check rendering performance
-- [ ] Check in both dark and light mode
-- [ ] Write README
+- [x] Check in both dark and light mode
+- [x] Write README
 - [ ] Add necessary comments

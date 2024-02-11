@@ -59,7 +59,7 @@ export default function TaskCard({
                     <button onClick={onClick}>
                         <CheckCircleIcon
                             className={`h-12 w-12 ${
-                                isDone ? 'text-green-500' : 'text-slate-300'
+                                isDone ? 'text-primary' : 'text-slate-300'
                             }`}
                         />
                     </button>

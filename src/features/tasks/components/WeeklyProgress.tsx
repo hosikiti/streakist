@@ -23,7 +23,7 @@ export default function WeeklyProgress({
                     key={i}
                     className={`rounded-full ${
                         i < currentWeekStreak
-                            ? 'dark:bg-white bg-gray-900'
+                            ? 'dark:bg-white bg-primary'
                             : 'dark:bg-gray-400 bg-gray-300'
                     } w-1 h-1`}
                 ></div>

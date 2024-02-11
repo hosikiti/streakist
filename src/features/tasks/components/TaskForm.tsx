@@ -39,6 +39,7 @@ export default function TaskForm({
                 <input
                     {...register('title', { required: true })}
                     className={FORM_INPUT_CLASS}
+                    placeholder='e.g. "Read a book"'
                 />
                 {formState.errors.title && (
                     <span className="text-xs text-error">
