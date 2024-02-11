@@ -1,10 +1,14 @@
-import { CheckCircleIcon, PencilIcon } from '@heroicons/react/24/solid';
+import {
+    CheckCircleIcon,
+    MinusIcon,
+    PencilIcon,
+} from '@heroicons/react/24/solid';
 import { Task, TrackingType } from '../task.types';
-import { useMemo } from 'react';
 import React from 'react';
-import { getStreak } from '../task.utils';
 import { useTaskTrackingDescription } from '../hooks/useTaskTrackingDescription';
 import WeeklyProgress from './WeeklyProgress';
+import { useIsTrackableDay } from '../hooks/useIsTrackableDay';
+import { useStreak } from '../hooks/useStreak';
 
 type TaskCardProps = {
     task: Task;
@@ -20,10 +24,8 @@ export default function TaskCard({
     currentDate,
 }: TaskCardProps) {
     const isDone = task.completeHistory.includes(currentDate);
-    const streak = useMemo(
-        () => getStreak(task, currentDate),
-        [task, currentDate]
-    );
+    const isTrackableDay = useIsTrackableDay(task, currentDate);
+    const streak = useStreak(task, currentDate);
     const showWeeklyProgress = task.trackingType === TrackingType.Weekly;
     const trackingDescription = useTaskTrackingDescription(task);
 
@@ -56,12 +58,19 @@ export default function TaskCard({
                         <PencilIcon className="h-4 w-4 dark:text-slate-300" />
                     </button>
                     {/* show done button */}
-                    <button onClick={onClick}>
-                        <CheckCircleIcon
-                            className={`h-12 w-12 ${
-                                isDone ? 'text-primary' : 'text-slate-300'
-                            }`}
-                        />
+                    <button onClick={onClick} disabled={!isTrackableDay}>
+                        {isTrackableDay ? (
+                            <CheckCircleIcon
+                                className={`h-12 w-12 ${
+                                    isDone ? 'text-primary' : 'text-slate-300'
+                                }`}
+                            />
+                        ) : (
+                            <MinusIcon
+                                className="h-12 w-12 dark:text-slate-700 text-slate-300"
+                                title="Today is not a day to do this task!"
+                            />
+                        )}
                     </button>
                 </div>
             </div>
