@@ -71,7 +71,7 @@ export default function TaskItem({
                                 ))}
                     </div>
                 </div>
-                <div className="card-title text-white flex flex-col items-start w-[30%] md:w-[40%]">
+                <div className="card-title text-white flex flex-col items-start w-[35%] md:w-[40%]">
                     <span className="line-clamp-2">{task.title}</span>
                     {/* show tracking type info */}
                     <span className="text-xs font-thin">
