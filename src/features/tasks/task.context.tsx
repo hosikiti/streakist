@@ -13,7 +13,6 @@ export interface TaskStore {
     deleteTask: (taskId: string) => void;
     toggleDone: (taskId: string) => void;
     setCurrentDate: (date: Date) => void;
-    getStreak: (task: Task, currentDate: string) => number;
 }
 
 export const TaskContext = createContext<TaskStore | undefined>(undefined);
@@ -85,23 +84,6 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
                 ...prev,
                 currentDate: formatDate(date),
             }));
-        },
-        getStreak: (task: Task, currentDate: string) => {
-            const history = task.completeHistory;
-            const dailyTrackingDays =
-                task.trackingOptions.dailyTrackingDays || [];
-            const weeklyTrackingFrequency =
-                task.trackingOptions.weeklyTrackingFrequency || 0;
-
-            if (task.trackingType === TrackingType.Daily) {
-                return getDailyStreak(history, currentDate, dailyTrackingDays);
-            } else {
-                return getWeeklyStreak(
-                    history,
-                    currentDate,
-                    weeklyTrackingFrequency
-                );
-            }
         },
     };
 
