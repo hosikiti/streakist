@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { DaysOfWeek } from '../../../utils/date';
 import { useTaskContext } from '../task.context';
-import TaskForm, { AddTaskForm } from './TaskForm';
+import TaskForm, { AddTaskForm, convertAddFormValueToTask } from './TaskForm';
 import { Task, TrackingType } from '../task.types';
 import { generateUUID } from '../../../utils/uuid';
 import { PlusIcon } from '@heroicons/react/24/solid';
@@ -16,9 +16,10 @@ const addTaskDefaultValues: AddTaskForm = {
 };
 
 export default function AddTaskButton() {
-    const { register, handleSubmit, formState, reset } = useForm<AddTaskForm>({
-        defaultValues: addTaskDefaultValues,
-    });
+    const { register, handleSubmit, formState, reset, watch } =
+        useForm<AddTaskForm>({
+            defaultValues: addTaskDefaultValues,
+        });
     const taskContext = useTaskContext();
 
     const openModal = () => {
@@ -32,21 +33,7 @@ export default function AddTaskButton() {
     };
 
     const onSubmit = handleSubmit((data) => {
-        const newTask: Task = {
-            id: generateUUID(),
-            title: data.title,
-            completeHistory: [],
-            trackingType: data.trackingType,
-            trackingOptions: {
-                dailyTrackingDays: data.dailyTrackingDays
-                    ? data.dailyTrackingDays.map((day) => +day)
-                    : undefined,
-                weeklyTrackingFrequency: data.weeklyTrackingFrequency
-                    ? +data.weeklyTrackingFrequency
-                    : undefined,
-            },
-        };
-        console.log(newTask);
+        const newTask = convertAddFormValueToTask(data);
         taskContext.addTask(newTask);
         closeModal();
         reset();
@@ -69,6 +56,7 @@ export default function AddTaskButton() {
                         onSubmit={onSubmit}
                         register={register}
                         formState={formState}
+                        formWatch={watch}
                     />
                     <div className="modal-action">
                         <form method="dialog" className="flex flex-row gap-4">

@@ -9,6 +9,7 @@ export interface TaskStore {
     currentDate: string;
     tasks: Task[];
     addTask: (task: Task) => void;
+    updateTask: (task: Task) => void;
     toggleDone: (taskId: string) => void;
     setCurrentDate: (date: Date) => void;
     getStreak: (task: Task, currentDate: string) => number;
@@ -36,6 +37,12 @@ export const TaskContextProvider = ({ children }: TaskContextProviderProps) => {
             setTaskStore((prev) => ({
                 ...prev,
                 tasks: [...prev.tasks, task],
+            }));
+        },
+        updateTask: (task: Task) => {
+            setTaskStore((prev) => ({
+                ...prev,
+                tasks: prev.tasks.map((t) => (t.id === task.id ? task : t)),
             }));
         },
         toggleDone: (taskId: string) => {

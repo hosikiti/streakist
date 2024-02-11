@@ -8,6 +8,7 @@ type TaskItemProps = {
     task: Task;
     isDone: boolean;
     onClick: () => void;
+    onClickEdit: () => void;
     streak: number;
     currentDate: string;
 };
@@ -16,6 +17,7 @@ export default function TaskItem({
     task,
     isDone,
     onClick,
+    onClickEdit,
     streak,
     currentDate,
 }: TaskItemProps) {
@@ -50,10 +52,10 @@ export default function TaskItem({
         <div className="card w-full glass">
             <div className="card-body flex flex-row justify-between items-center p-4">
                 <div className="flex flex-col gap-2">
-                    <span className="text-white font-bold text-6xl">
+                    <span className="text-white font-bold text-4xl">
                         {streak}
                     </span>
-                    <div className="flex flex-row gap-1">
+                    <div className="flex gap-1 w-[30px] flex-wrap">
                         {showWeeklyProgress &&
                             new Array(weeklyFrequency)
                                 .fill(0)
@@ -69,21 +71,19 @@ export default function TaskItem({
                                 ))}
                     </div>
                 </div>
-                <div className="card-title text-white flex flex-col items-start w-[40%]">
-                    <span>{task.title}</span>
+                <div className="card-title text-white flex flex-col items-start w-[30%] md:w-[40%]">
+                    <span className="line-clamp-2">{task.title}</span>
                     {/* show tracking type info */}
                     <span className="text-xs font-thin">
                         {trackingDescription}
                     </span>
                 </div>
                 <div className="flex flex-row gap-4">
-                    <button
-                        onClick={() => {
-                            alert('hey');
-                        }}
-                    >
+                    {/* show edit button */}
+                    <button onClick={onClickEdit}>
                         <PencilIcon className="h-4 w-4 text-slate-300" />
                     </button>
+                    {/* show done button */}
                     <button onClick={onClick}>
                         <CheckCircleIcon
                             className={`h-12 w-12 ${

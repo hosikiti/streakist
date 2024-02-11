@@ -1,9 +1,11 @@
-import { FormEventHandler, useState } from 'react';
-import { FormState, UseFormRegister } from 'react-hook-form';
+import { FormEventHandler } from 'react';
+import { FormState, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { DaysLabel, DaysOfWeek } from '../../../utils/date';
 import { Task, TrackingType } from '../task.types';
+import { generateUUID } from '../../../utils/uuid';
 
 export interface AddTaskForm {
+    id?: string;
     title: string;
     trackingType: TrackingType;
     dailyTrackingDays: string[];
@@ -14,7 +16,7 @@ type TaskFormProps = {
     onSubmit: FormEventHandler<HTMLFormElement>;
     register: UseFormRegister<AddTaskForm>;
     formState: FormState<AddTaskForm>;
-    defaultValues?: Task;
+    formWatch: UseFormWatch<AddTaskForm>;
 };
 
 const FORM_FIELD_CLASS = 'flex flex-col gap-2';
@@ -26,11 +28,9 @@ export default function TaskForm({
     onSubmit,
     register,
     formState,
-    defaultValues,
+    formWatch,
 }: TaskFormProps) {
-    const [trackingType, setTrackingType] = useState<TrackingType>(
-        defaultValues?.trackingType ?? TrackingType.Daily
-    );
+    const watchTrackingType = formWatch('trackingType', TrackingType.Daily);
 
     return (
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
@@ -51,9 +51,6 @@ export default function TaskForm({
                 <select
                     {...register('trackingType')}
                     className={FORM_SELECT_CLASS}
-                    onChange={(e) =>
-                        setTrackingType(e.target.value as TrackingType)
-                    }
                 >
                     <option value={TrackingType.Daily}>Daily</option>
                     <option value={TrackingType.Weekly}>Weekly</option>
@@ -61,29 +58,38 @@ export default function TaskForm({
             </div>
             <div className={FORM_FIELD_CLASS}>
                 <label>How often do you want to do it?</label>
-                {trackingType === TrackingType.Daily && (
-                    <div className="flex flex-wrap gap-4">
-                        {DaysOfWeek.map((day) => {
-                            return (
-                                <label
-                                    className="flex flex-row items-center gap-2"
-                                    key={day}
-                                >
-                                    <input
-                                        type="checkbox"
-                                        className="checkbox"
-                                        {...register('dailyTrackingDays')}
-                                        value={day}
-                                    />
-                                    <span className="label-text">
-                                        {DaysLabel[day]}
-                                    </span>
-                                </label>
-                            );
-                        })}
-                    </div>
+                {watchTrackingType === TrackingType.Daily && (
+                    <>
+                        <div className="flex flex-wrap gap-4">
+                            {DaysOfWeek.map((day) => {
+                                return (
+                                    <label
+                                        className="flex flex-row items-center gap-2"
+                                        key={day}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            className="checkbox"
+                                            {...register('dailyTrackingDays', {
+                                                required: true,
+                                            })}
+                                            value={day}
+                                        />
+                                        <span className="label-text">
+                                            {DaysLabel[day]}
+                                        </span>
+                                    </label>
+                                );
+                            })}
+                        </div>
+                        {formState.errors.dailyTrackingDays && (
+                            <span className="text-xs text-error">
+                                Select at least one day
+                            </span>
+                        )}
+                    </>
                 )}
-                {trackingType === TrackingType.Weekly && (
+                {watchTrackingType === TrackingType.Weekly && (
                     <div className={FORM_FIELD_CLASS}>
                         <div className="flex flex-row gap-2 items-center">
                             <input
@@ -114,3 +120,21 @@ export default function TaskForm({
         </form>
     );
 }
+
+export const convertAddFormValueToTask = (data: AddTaskForm): Task => {
+    const task: Task = {
+        id: data.id ?? generateUUID(),
+        title: data.title,
+        completeHistory: [],
+        trackingType: data.trackingType,
+        trackingOptions: {
+            dailyTrackingDays: data.dailyTrackingDays
+                ? data.dailyTrackingDays.map((day) => +day)
+                : undefined,
+            weeklyTrackingFrequency: data.weeklyTrackingFrequency
+                ? +data.weeklyTrackingFrequency
+                : undefined,
+        },
+    };
+    return task;
+};
