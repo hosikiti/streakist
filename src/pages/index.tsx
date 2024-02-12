@@ -4,7 +4,6 @@ import CurrentDateSelect from '../features/tasks/components/CurrentDateSelect';
 import TaskList from '../features/tasks/components/TaskList';
 import { useTaskContext } from '../features/tasks/task.context';
 
-const MemoAddTaskButton = React.memo(AddTaskButton);
 const MemoCurrentDateSelect = React.memo(
     CurrentDateSelect,
     (prev, next) => prev.currentDate === next.currentDate
@@ -22,7 +21,7 @@ export default function IndexPage() {
                     setCurrentDate={setCurrentDate}
                 />
             </div>
-            <MemoAddTaskButton />
+            <AddTaskButton />
             <TaskList />
         </div>
     );
