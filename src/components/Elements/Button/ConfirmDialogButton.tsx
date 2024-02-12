@@ -27,9 +27,7 @@ export default function ConfirmDialogButton({
                             <label
                                 htmlFor={MODAL_ID}
                                 className="btn btn-primary"
-                                onClick={() => {
-                                    onSelectOK();
-                                }}
+                                onClick={onSelectOK}
                             >
                                 OK
                             </label>

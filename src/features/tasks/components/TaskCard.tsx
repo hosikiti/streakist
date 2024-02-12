@@ -57,7 +57,7 @@ export default function TaskCard({
                     <button onClick={onClickEdit}>
                         <PencilIcon className="h-4 w-4 dark:text-slate-300" />
                     </button>
-                    {/* show done button */}
+                    {/* show button to complete the task */}
                     <button onClick={onClick} disabled={!isTrackableDay}>
                         {isTrackableDay ? (
                             <CheckCircleIcon

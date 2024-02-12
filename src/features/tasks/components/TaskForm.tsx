@@ -35,6 +35,7 @@ export default function TaskForm({
 
     return (
         <form onSubmit={onSubmit} className="flex flex-col gap-4">
+            {/* show title input */}
             <FieldWrapper
                 label="Title"
                 fieldError={formState.errors.title}
@@ -46,6 +47,7 @@ export default function TaskForm({
                     placeholder='e.g. "Read a book"'
                 />
             </FieldWrapper>
+            {/* show tracking type select */}
             <FieldWrapper label="Tracking Type">
                 <select
                     {...register('trackingType')}
@@ -56,6 +58,7 @@ export default function TaskForm({
                 </select>
             </FieldWrapper>
 
+            {/* show daily tracking days checkboxes */}
             {watchTrackingType === TrackingType.Daily && (
                 <FieldWrapper label="How often do you want to do it?">
                     <DaysCheckboxGroup
@@ -68,6 +71,8 @@ export default function TaskForm({
                     )}
                 </FieldWrapper>
             )}
+
+            {/* show weekly tracking frequency input */}
             {watchTrackingType === TrackingType.Weekly && (
                 <FieldWrapper
                     label="How often do you want to do it?"
@@ -77,13 +82,9 @@ export default function TaskForm({
                     <div className="flex flex-row gap-2 items-center">
                         <input
                             {...register('weeklyTrackingFrequency', {
-                                validate: (value) => {
-                                    if (value === undefined) {
-                                        return true;
-                                    }
-                                    const num = parseInt(value);
-                                    return num >= 1 && num <= 7;
-                                },
+                                min: 1,
+                                max: 7,
+                                required: true,
                             })}
                             className={FORM_DAYS_INPUT_CLASS}
                             type="number"
