@@ -6,7 +6,7 @@ A simple habit/task tracker app
 
 Task List             |  Task Add/Edit Dialog
 :-------------------------:|:-------------------------:
-![](./assets/streakist.png)  |  ![](./assets/task_modal.png)
+![](./assets/resize_streakist.png)  |  ![](./assets/resize_task_modal.png)
 
 ## Technologies
 
