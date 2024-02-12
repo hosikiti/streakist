@@ -1,5 +1,5 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import { DaysLabel, DaysOfWeek } from '../../../utils/date';
+import { DaysLabel, DaysOfWeek } from '../../utils/date';
 
 type DaysCheckboxGroupProps = {
     registration: UseFormRegisterReturn;

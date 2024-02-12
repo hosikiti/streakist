@@ -2,9 +2,9 @@ import { FormEventHandler } from 'react';
 import { FormState, UseFormRegister, UseFormWatch } from 'react-hook-form';
 import { Task, TrackingType } from '../task.types';
 import { generateUUID } from '../../../utils/uuid';
-import FieldWrapper from '../../../components/Elements/Form/FieldWrapper';
-import DaysCheckboxGroup from '../../../components/Elements/Form/DaysCheckboxGroup';
-import FieldErrorLabel from '../../../components/Elements/Form/FieldErrorLabel';
+import FieldWrapper from '../../../components/Form/FieldWrapper';
+import DaysCheckboxGroup from '../../../components/Form/DaysCheckboxGroup';
+import FieldErrorLabel from '../../../components/Form/FieldErrorLabel';
 
 export interface AddTaskForm {
     id?: string;
