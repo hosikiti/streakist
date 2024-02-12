@@ -24,7 +24,7 @@ The app adopts Provider Pattern for state management. All data sources are defin
 
 ## Testing Strategy
 
-The project only tests complex business logic (such as streak calculation) for developer efficiency. The UI components are not tested as they are simple, straightforward, and frequently changing.
+The project only tests complex business logic (such as streak calculation) for developer efficiency. The UI components tests are not included project as they are straightforward and frequently changing.
 
 To run the tests, run the following command:
 
