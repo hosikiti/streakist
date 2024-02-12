@@ -40,4 +40,4 @@ npm test
 - [x] Check rendering performance
 - [x] Check in both dark and light mode
 - [x] Write README
-- [ ] Add necessary comments
+- [x] Add necessary comments
