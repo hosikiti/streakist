@@ -1,11 +1,12 @@
 # Streakist
 
-A simple habit tracker app
+A simple habit/task tracker app
 
 ## Screenshot
 
-<img src="./assets/streakist.png" width="350"/>
-<img src="./assets/task_modal.png" width="350"/>
+Task List             |  Task Add/Edit Dialog
+:-------------------------:|:-------------------------:
+![](./assets/streakist.png)  |  ![](./assets/task_modal.png)
 
 ## Technologies
 
