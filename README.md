@@ -30,7 +30,7 @@ The app adopts Provider Pattern for separating states and UI components, leading
 
 ## Testing Strategy
 
-The project tests complex business logic (such as streak calculation) for developer efficiency. In contrast, the UI components' tests are not included as they are straightforward and frequently changing.
+The project includes unit tests for complex business logic (such as streak calculation) using Jest.
 
 To run the tests, run the following command:
 
