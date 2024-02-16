@@ -10,7 +10,7 @@ export const useTaskTrackingDescription = (task: Task) => {
             const trackingDays = task.trackingOptions.dailyTrackingDays || [];
 
             if (trackingDays.length === 7) {
-                return 'on Everyday';
+                return 'Every day';
             }
 
             const trackingDayLabels = trackingDays.map(

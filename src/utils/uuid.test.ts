@@ -2,8 +2,13 @@ import { generateUUID } from './uuid';
 
 describe('uuid', () => {
     test('should generate a unique id', () => {
-        const id1 = generateUUID();
-        const id2 = generateUUID();
-        expect(id1).not.toEqual(id2);
+        const uuids: string[] = [];
+
+        for (let i = 0; i < 10000; i++) {
+            uuids.push(generateUUID());
+        }
+
+        const uniqueUuids = new Set(uuids);
+        expect(uniqueUuids.size).toBe(uuids.length);
     });
 });
