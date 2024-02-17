@@ -42,6 +42,12 @@ describe('daily streak', () => {
         expect(getDailyStreak([], saturday, trackAllDays)).toBe(0);
     });
 
+    test('does not count history that is after today', () => {
+        expect(getDailyStreak([thursday, friday], monday, trackAllDays)).toBe(
+            0
+        );
+    });
+
     test('returns 1 for 1 day streak', () => {
         expect(getDailyStreak([friday], saturday, trackAllDays)).toBe(1);
     });
@@ -98,6 +104,10 @@ describe('daily streak', () => {
 describe('weekly streak', () => {
     test('returns 0 for empty history', () => {
         expect(getWeeklyStreak([], monday, 2)).toBe(0);
+    });
+
+    test('does not count history that is after today', () => {
+        expect(getWeeklyStreak([thursday, friday], monday, 2)).toBe(0);
     });
 
     test('returns 2 for 2 days streak when you complete them in the same week', () => {
