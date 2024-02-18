@@ -19,9 +19,9 @@ export const useTaskTrackingDescription = (task: Task) => {
 
             return `on ${trackingDayLabels.join(', ')}`;
         } else {
-            return `${weeklyFrequency} ${
-                weeklyFrequency === 1 ? 'time' : 'times'
-            } a week`;
+            return weeklyFrequency === 1
+                ? 'Once a week'
+                : `${weeklyFrequency} times a week`;
         }
     }, [task]);
 };
